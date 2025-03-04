@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Python Django (Standard) N56</title>
+    <link rel="stylesheet" href="{% static 'erp/css/styless.css' %}">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <h2>EVEREST <span class="beta">Beta</span></h2>
+        <nav>
+            <ul>
+                <li><a href="#">Bosh sahifa</a></li>
+                <li><a href="#">To'lovlarim</a></li>
+                <li><a href="#">Guruhlarim</a></li>
+                <li><a href="#">Ko'rsatkichlarim</a></li>
+                <li><a href="#">Reyting</a></li>
+                <li><a href="#">Do'kon</a></li>
+                <li><a href="#">Video</a></li>
+                <li><a href="#">Sozlamalar</a></li>
+                <li><a href="#">Davomat</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="content">
+        <h2>Backend Python Django (Standard) N56</h2>
+
+        <label for="status">Uy vazifa statusi</label>
+        <select id="status">
+            <option value="barchasi">Barchasi</option>
+        </select>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Mavzular</th>
+                    <th>Video</th>
+                    <th>Uyga vazifa Holati</th>
+                    <th>Uyga vazifa tugash vaqti</th>
+                    <th>Dars sanasi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Django signals, slug</td>
+                    <td><a href="#">1</a></td>
+                    <td><span class="kutayotganlar">Kutayotganlar</span></td>
+                    <td>27 Fev, 2025 08:15</td>
+                    <td>25 Fev, 2025</td>
+                </tr>
+                <tr>
+                    <td>activation link and signals</td>
+                    <td><a href="#">1</a></td>
+                    <td><span class="qabul-qilingan">Qabul qilingan</span></td>
+                    <td>24 Fev, 2025 08:10</td>
+                    <td>22 Fev, 2025</td>
+                </tr>
+                <tr>
+                    <td>Google orqali login qilish</td>
+                    <td><a href="#">2</a></td>
+                    <td><span class="qabul-qilingan">Qabul qilingan</span></td>
+                    <td>22 Fev, 2025 08:11</td>
+                    <td>20 Fev, 2025</td>
+                </tr>
+                <tr>
+                    <td>Sending email</td>
+                    <td><a href="#">1</a></td>
+                    <td><span class="qabul-qilingan">Qabul qilingan</span></td>
+                    <td>20 Fev, 2025 23:59</td>
+                    <td>18 Fev, 2025</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <script src="{% static 'erp/java/script.js' %}"></script>
+</body>
+</html>

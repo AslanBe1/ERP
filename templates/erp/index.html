@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Student Panel</title>
+    <link rel="stylesheet" href="{% static 'erp/css/styles.css' %}">
+</head>
+<body>
+    <aside class="sidebar">
+        {% if user.is_authenticated %}
+        {{ user.email | slice:"0:18"}}
+        {% endif %}
+        <h2>EVEREST <span class="beta">Beta</span></h2>
+        <nav>
+            <ul>
+                <li><a href="#">Bosh sahifa</a></li>
+                <li><a href="#">To'lovlarim</a></li>
+                <li><a href="{% url 'erp:groups' %}">Guruhlarim</a></li>
+                <li><a href="#">Ko'rsatkichlarim</a></li>
+                <li><a href="#">Reyting</a></li>
+                <li><a href="#">Do'kon</a></li>
+                <li><a href="#">Video</a></li>
+                <li><a href="#">Sozlamalar</a></li>
+                <li><a href="{% url 'erp:attendance' %}">Davomat</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="content">
+        <section class="stats">
+            {% if user.is_authenticated %}
+                <a href="{% url 'user:logout' %}" id="logoutButton">
+                    <button type="button" class="w-full bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+                        Logout
+                    </button>
+                </a>
+            {% else %}
+            <a href="{% url 'user:login' %}"><button class="claim-reward">Login</button></a>
+            <a href="{% url 'user:register' %}"><button class="claim-reward">Register</button></a>
+            {% endif %}
+            <h1>Kumushlar: <span>{{ profile.xp_calculation }}</span></h1>
+            <div class="progress">
+                <p><strong>Bosqich:</strong> 3</p>
+                <progress id="xpBar" value="940" max="1100"></progress>
+                <p><strong>XP:</strong> <span id="xpValue">{{ profile.XP }}</span></p>
+            </div>
+            <div class="rating">
+                <h2>Reyting</h2>
+                <p><strong>Umumiy:</strong> 255-o'rin</p>
+                <p><strong>Backend Python Django (Standard) N56:</strong> 3-o'rin</p>
+            </div>
+        </section>
+        <section class="schedule">
+            <h2>Dars jadvali</h2>
+            <p>Fev 2025</p>
+            <table>
+                <tr>
+                    <th>D</th><th>S</th><th>C</th><th>P</th><th>J</th><th>S</th><th>Y</th>
+                </tr>
+                <tr>
+                    <td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
+                </tr>
+                <tr>
+                    <td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td>
+                </tr>
+            </table>
+        </section>
+    </main>
+    <script src="{% static 'erp/java/script.js' %}"></script>
+</body>
+</html>
