@@ -39,4 +39,29 @@ class Profile(models.Model):
         return a
 
     def level_calculation(self):
-        pass
+        if self.XP == 0:
+            return 0
+
+        elif self.XP < 110:
+            return 1
+
+        elif self.XP < 250:
+            return 2
+
+        elif self.XP < 500:
+            return 3
+
+        elif self.XP < 750:
+            return 4
+
+        elif self.XP < 1000:
+            return 5
+
+        elif self.XP < 2000:
+            return 6
+
+
+    def image_url(self):
+        if self.image:
+            return self.image.url
+        return ''

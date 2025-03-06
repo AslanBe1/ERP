@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Student Panel</title>
+    <link rel="stylesheet" href="{% static 'erp/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'erp/css/peronal.css' %}">
+</head>
+<body>
+    <aside class="sidebar">
+        {% if user.is_authenticated %}
+        {{ user.email | slice:"0:18"}}
+        {% endif %}
+        <h2>EVEREST <span class="beta">Beta</span></h2>
+        <nav>
+            <ul>
+                <li><a href="#">Bosh sahifa</a></li>
+                <li><a href="#">To'lovlarim</a></li>
+                <li><a href="{% url 'erp:groups' %}">Guruhlarim</a></li>
+                <li><a href="#">Ko'rsatkichlarim</a></li>
+                <li><a href="#">Reyting</a></li>
+                <li><a href="#">Do'kon</a></li>
+                <li><a href="{% url 'erp:video_list' %}">Video</a></li>
+                <li><a href="{% url 'erp:settings' %}">Sozlamalar</a></li>
+                <li><a href="{% url 'erp:attendance' %}">Davomat</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="content">
+        <h1>Videolar</h1>
+        <form method="get" action="{% url 'erp:video_list' %}">
+            <div class="video-controls">
+                <input type="text" name="q" placeholder="Video qidir...">
+                <button type="submit">🔍</button>
+                <button type="reset">Tozalash</button>
+                <button type="button"><a href="{% url 'erp:create_video' %}" style="text-decoration: none; color: inherit;">Video Qo'shish</a></button>
+            </div>
+        </form>
+        <div id="confirmationModal" style="display:none;">
+            <div class="modal-content">
+                <h2>Are you sure you want to delete?</h2>
+                <button class="yes-btn" onclick="confirmDelete()">Yes</button>
+                <button class="no-btn" onclick="closeModal()">No</button>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Video nomi</th>
+                    <th>Dars nomi</th>
+                    <th>Davomiylik</th>
+                    <th>Harakatlar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for video in videos %}
+                    <tr>
+                        <td><a href="{% url 'erp:videos' video.id %}" style="text-decoration: none; color: inherit;">{{ video.name }}</a></td>
+                        <td><a href="{% url 'erp:videos' video.id %}" style="text-decoration: none; color: inherit;">{{ video.lesson }}</a></td>
+                        <td>{{ video.duration }} min</td>
+                        <td>
+                            <button><a href="{% url 'erp:edit_video' video.id %}" style="text-decoration: none; color: inherit;">✏️</a></button>
+                            <button onclick="showConfirmation({{ video.id }})">🗑️</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+
+    <script type="text/javascript">
+        let videoIdToDelete = null;
+
+        function showConfirmation(videoId) {
+            videoIdToDelete = videoId;
+            document.getElementById("confirmationModal").style.display = "flex";
+        }
+
+        function confirmDelete() {
+            if (videoIdToDelete) {
+                window.location.href = "{% url 'erp:delete_video' 0 %}".replace("0", videoIdToDelete);
+            }
+        }
+
+        function closeModal() {
+            document.getElementById("confirmationModal").style.display = "none";
+        }
+    </script>
+
+    <style>
+        #confirmationModal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            width: 100%;
+            height: 100%;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .yes-btn, .no-btn {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .no-btn {
+            background-color: red;
+        }
+
+        .yes-btn:hover {
+            background-color: darkgreen;
+        }
+
+        .no-btn:hover {
+            background-color: darkred;
+        }
+    </style>
+</body>
+</html>

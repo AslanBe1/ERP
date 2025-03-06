@@ -48,7 +48,7 @@
 <body>
     <aside class="sidebar">
         {% if user.is_authenticated %}
-        {{ user.email | slice:"0:18"}}
+        {{ profiles.name | slice:"0:18"}}
         {% endif %}
         <h2>EVEREST <span class="beta">Beta</span></h2>
         <nav>
@@ -82,20 +82,14 @@
                 <th>Izoh</th>
             </tr>
             <tr>
-                <td>1</td>
-                <td>{{ user.email }}</td>
+                {% for profile in profiles %}
+                <td>{{ forloop.counter }}</td>
+                <td>{{  profile.name }}</td>
                 <td class="present">✔</td>
                 <td>4</td>
                 <td>28</td>
                 <td>-</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>{{ user.email }}</td>
-                <td class="present">✔</td>
-                <td>4</td>
-                <td>20</td>
-                <td>-</td>
+                {% endfor %}
             </tr>
         </table>
     </div>

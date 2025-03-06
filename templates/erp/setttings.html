@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaxsiy Ma'lumotlar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'erp/css/styles.css'%}">
+</head>
+<body>
+    <div class="d-flex">
+        <aside class="sidebar p-3" style="width: 250px; background-color: #f8f9fa; height: 100vh;">
+            <h2>EVEREST <span class="beta">Beta</span></h2>
+            <nav>
+                <ul class="list-unstyled">
+                    <li><a href="#">Bosh sahifa</a></li>
+                    <li><a href="#">To'lovlarim</a></li>
+                    <li><a href="{% url 'erp:groups' %}">Guruhlarim</a></li>
+                    <li><a href="#">Ko'rsatkichlarim</a></li>
+                    <li><a href="#">Reyting</a></li>
+                    <li><a href="#">Do'kon</a></li>
+                    <li><a href="#">Video</a></li>
+                    <li><a href="{% url 'erp:settings' %}">Sozlamalar</a></li>
+                    <li><a href="{% url 'erp:attendance' %}">Davomat</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <main class="flex-grow-1 p-4">
+            {% if user.is_authenticated %}
+                <div class="profile text-center">
+                    <img src="{% static 'erp/images/profile.jpg' %}" alt="Profile Picture" class="rounded-circle mb-3" width="100">
+                    <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+                    <p><strong>ID:</strong> {{ user.id }}</p>
+                    <p><strong>Tug'ilgan sana:</strong> {{ user.birth_date }}</p>
+                    <p><strong>Jinsi:</strong> {{ user.gender }}</p>
+                    <p><strong>Telefon:</strong> {{ user.phone }}</p>
+                </div>
+            {% endif %}
+        </main>
+    </div>
+</body>
+</html>

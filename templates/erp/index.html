@@ -10,7 +10,7 @@
 <body>
     <aside class="sidebar">
         {% if user.is_authenticated %}
-        {{ user.email | slice:"0:18"}}
+        {{ profile.name}} {{ profile.surname }}
         {% endif %}
         <h2>EVEREST <span class="beta">Beta</span></h2>
         <nav>
@@ -19,10 +19,9 @@
                 <li><a href="#">To'lovlarim</a></li>
                 <li><a href="{% url 'erp:groups' %}">Guruhlarim</a></li>
                 <li><a href="#">Ko'rsatkichlarim</a></li>
-                <li><a href="#">Reyting</a></li>
-                <li><a href="#">Do'kon</a></li>
-                <li><a href="#">Video</a></li>
-                <li><a href="#">Sozlamalar</a></li>
+                <li><a href="{% url 'erp:homework' %}">Uy Vazifa qo'shish</a></li>
+                <li><a href="{% url 'erp:video_list' %}">Video</a></li>
+                <li><a href="{% url 'erp:settings' %}">Sozlamalar</a></li>
                 <li><a href="{% url 'erp:attendance' %}">Davomat</a></li>
             </ul>
         </nav>
@@ -41,7 +40,7 @@
             {% endif %}
             <h1>Kumushlar: <span>{{ profile.xp_calculation }}</span></h1>
             <div class="progress">
-                <p><strong>Bosqich:</strong> 3</p>
+                <p><strong>Bosqich:</strong> {{ profile.level_calculation }}</p>
                 <progress id="xpBar" value="940" max="1100"></progress>
                 <p><strong>XP:</strong> <span id="xpValue">{{ profile.XP }}</span></p>
             </div>

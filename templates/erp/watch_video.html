@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Student Panel</title>
+    <link rel="stylesheet" href="{% static 'erp/css/styles.css' %}">
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .sidebar {
+            width: 250px;
+            background: #333;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+        .content {
+            margin-left: 270px;
+            padding: 20px;
+            width: calc(100% - 270px);
+            text-align: center;
+        }
+        video {
+            width: 80%;
+            max-width: 800px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        {% if user.is_authenticated %}
+        {{ user.email | slice:"0:18"}}
+        {% endif %}
+        <h2>EVEREST <span class="beta">Beta</span></h2>
+        <nav>
+            <ul>
+                <li><a href="#">Bosh sahifa</a></li>
+                <li><a href="#">To'lovlarim</a></li>
+                <li><a href="{% url 'erp:groups' %}">Guruhlarim</a></li>
+                <li><a href="#">Ko'rsatkichlarim</a></li>
+                <li><a href="#">Reyting</a></li>
+                <li><a href="#">Do'kon</a></li>
+                <li><a href="{% url 'erp:video_list' %}">Video</a></li>
+                <li><a href="{% url 'erp:settings' %}">Sozlamalar</a></li>
+                <li><a href="{% url 'erp:attendance' %}">Davomat</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="content">
+        <h1>Video Ko'rish</h1>
+        <video controls>
+            <source src="{{ video.get_absolute_url }}" type="video/mp4">
+        </video>
+    </main>
+</body>
+</html>
