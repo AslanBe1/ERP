@@ -43,12 +43,11 @@
         <h2>EVEREST <span class="beta">Beta</span></h2>
         <nav>
             <ul>
-                <li><a href="#">Bosh sahifa</a></li>
+                <li><a href="{% url 'erp:index' %}">Bosh sahifa</a></li>
                 <li><a href="#">To'lovlarim</a></li>
                 <li><a href="{% url 'erp:groups' %}">Guruhlarim</a></li>
                 <li><a href="#">Ko'rsatkichlarim</a></li>
-                <li><a href="#">Reyting</a></li>
-                <li><a href="#">Do'kon</a></li>
+                <li><a href="{% url 'erp:homework' %}">Uy Vazifa qo'shish</a></li>
                 <li><a href="{% url 'erp:video_list' %}">Video</a></li>
                 <li><a href="{% url 'erp:settings' %}">Sozlamalar</a></li>
                 <li><a href="{% url 'erp:attendance' %}">Davomat</a></li>

@@ -57,10 +57,9 @@
                 <li><a href="#">To'lovlarim</a></li>
                 <li><a href="{% url 'erp:groups' %}">Guruhlarim</a></li>
                 <li><a href="#">Ko'rsatkichlarim</a></li>
-                <li><a href="#">Reyting</a></li>
-                <li><a href="#">Do'kon</a></li>
-                <li><a href="#">Video</a></li>
-                <li><a href="#">Sozlamalar</a></li>
+                <li><a href="{% url 'erp:homework' %}">Uy Vazifa qo'shish</a></li>
+                <li><a href="{% url 'erp:video_list' %}">Video</a></li>
+                <li><a href="{% url 'erp:settings' %}">Sozlamalar</a></li>
                 <li><a href="{% url 'erp:attendance' %}">Davomat</a></li>
             </ul>
         </nav>
@@ -72,26 +71,36 @@
         <p><strong>Dars vaqti:</strong> 18:30 - 20:30</p>
         <p><strong>Mavzu:</strong> Export data, aggregate and annotate</p>
         <p><strong>Dars kunlari:</strong> Se-Pay-Sha</p>
-        <table>
-            <tr>
-                <th>#</th>
-                <th>O‘quvchi ismi</th>
-                <th>Kelgan</th>
-                <th>XP</th>
-                <th>Kumush</th>
-                <th>Izoh</th>
-            </tr>
-            <tr>
+       <form method="post">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>O‘quvchi ismi</th>
+                    <th>Kelgan</th>
+                    <th>XP</th>
+                    <th>Kumush</th>
+                    <th>Izoh</th>
+                </tr>
                 {% for profile in profiles %}
-                <td>{{ forloop.counter }}</td>
-                <td>{{  profile.name }}</td>
-                <td class="present">✔</td>
-                <td>4</td>
-                <td>28</td>
-                <td>-</td>
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ profile.name }}</td>
+                    <td class="present">
+                        {% if profile.status == 'true' %}
+                            ✔
+                        {% else %}
+                            ❌
+                        {% endif %}
+                    </td>
+                    <td>4</td>
+                    <td>28</td>
+                    <td>{{ form.as_p }}</td>
+                </tr>
                 {% endfor %}
-            </tr>
-        </table>
+            </table>
+            <button type="submit">Saqlash</button>
+        </form>
     </div>
 </body>
 </html>

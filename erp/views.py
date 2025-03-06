@@ -2,10 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView
+from django.contrib import messages
 from User.models import User, Profile
 from erp.forms import VideoModelForm, AttendanceModelForm, HomeworkModelForm
 from erp.models import Video, Attendance, Homework
-
 
 # Create your views here.
 
@@ -69,11 +69,21 @@ def delete_video(request, pk):
 
 
 def attendance_view(request):
-    profile = get_object_or_404(Profile, user=request.user)
+    profile = Profile.objects.all()
+    if request.method == 'POST':
+        form = AttendanceModelForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('erp:attendance')
+    else:
+        form = AttendanceModelForm()
+
     context = {
         'profiles': profile,
+        'form': form
     }
     return render(request, 'erp/attendance.html', context=context)
+
 
 def delete_homework(request, pk):
     homework = get_object_or_404(Homework, pk=pk)

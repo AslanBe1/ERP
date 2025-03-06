@@ -12,7 +12,7 @@ class VideoModelForm(forms.ModelForm):
 class AttendanceModelForm(forms.ModelForm):
     class Meta:
         model = Attendance
-        fields = '__all__'
+        fields = ['status']
 
 
 class HomeworkModelForm(forms.ModelForm):
@@ -20,5 +20,6 @@ class HomeworkModelForm(forms.ModelForm):
         model = Homework
         fields = '__all__'
         widgets = {
-            'deadline': forms.DateTimeInput(attrs={'type': 'datetime-local'})
+            'deadline': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'is_present': forms.CheckboxInput()
         }
